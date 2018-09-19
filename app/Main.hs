@@ -8,9 +8,11 @@ import           System.Environment
 main :: IO ()
 main = do
   args <- getArgs
-  print $ head args
-  print $ tail args
-  r <- runInterpreter ex
+
+  cs <- getContents
+  let l = lines cs
+
+  r <- runInterpreter $ ex (head args) l
   case r of
     Left err -> print err
     Right () -> return ()
